@@ -63,6 +63,7 @@ int main(){
 		std::cout << "Area of trapeze = " << area(f) << std::endl;
 		return 0;
 	}else{
+		std::cout << "You choose wrong option. Program terminates." << std::endl;
 		return 0;
 	}
 }
