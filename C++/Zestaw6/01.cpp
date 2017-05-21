@@ -1,41 +1,39 @@
 #include <iostream>
 #include <string>
 
-class Osoba{
+class Person{
     private:
-        std::string imie;
-        std::string nazwisko;
+    std::string first;
+    std::string last;
 
     public:
-        Osoba(std::string im, std::string naz){
-            imie = im;
-            nazwisko = naz;
-        }
-
-        void input(){
-            std::string im;
-            std::string naz;
-            std::cout << "Give a first name: " << std::endl;
-            std::cin >> im;
-            std::cout << "Give a second name: " << std::endl;
-            std::cin >> naz;
-            imie = im;
-            nazwisko = naz;
-        }
-
-        void returnz(){
-            std::cout << imie << std::endl;
-            std::cout << nazwisko << std::endl;
-        }
+    Person(std::string, std::string);
+    void set(void);
+    void load(void);
 };
 
+Person::Person(std::string st, std::string lt){
+    first = st;
+    last = lt;
+}
+
+void Person::set(void){
+    std::cout << "Type a first name" << std::endl;
+    std::cin >> first;
+    std::cout << "Type last name" << std::endl;
+    std::cin >> last;
+}
+
+void Person::load(void){
+    std::cout << "Full name: " << first << " " << last << std::endl;
+}
 
 int main(){
-    Osoba os("Mateusz", "Gorczycki");
+    Person p("Mateusz", "Gorczycki");
     std::cout << "Names before change:" << std::endl;
-    os.returnz();
-    os.input();
+    p.load();
+    p.set();
     std::cout << "Names after change:" << std::endl;
-    os.returnz();
+    p.load();
     return 0;
 }
