@@ -1,7 +1,7 @@
 #include <iostream>
 
-//no fucking clue
-struct lista{
+//no clue
+struct list{
     int n;
     int *n;
 };
