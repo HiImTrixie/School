@@ -1,59 +1,78 @@
 #include <iostream>
 
-class Stack{
+class Queue{
+
     private:
-    int size, top;
     int *A;
-    
+    int front, rear, size;
     public:
-    Stack(int);
-    ~Stack(void);
-    void Push(int);
-    void Pop(void);
-    int Top(void);
+    Queue(int);
+    ~Queue(void);
     bool isEmpty(void);
+    void Enqueue(int);
+    void Dequeue(void);
+    int Front(void);
+    Queue(Queue&);
 };
 
-Stack::Stack(int n){
+Queue::Queue(int n){
     size = n;
-    top = 0;
     A = new int[n];
+    front = -1;
+    rear = -1;
 }
-
-Stack::~Stack(void){
+Queue::~Queue(void){
     delete [] A;
 }
 
-void Stack::Push(int x){
-    A[top] = x;
-    top++;
+bool Queue::isEmpty(void){
+    return(front == -1 && rear == -1);
 }
-void Stack::Pop(void){
+
+void Queue::Enqueue(int x){
     if(isEmpty()){
-        std::cout << "Stack is Empty. Cannot pop from empty stack." << std::endl;
+        front = rear = 0;
     }else{
-        top--;
+        rear = (rear+1)%size;
+    }
+    A[rear] = x;
+}
+
+void Queue::Dequeue(void){
+    if(isEmpty()){
+        std::cout << "Queue is Empty. Cannot remove element from empty queue." << std::endl;
+        return;
+    }else if(front == rear){
+        rear = front = -1;
+    }else{
+        front = (front+1)%size;
     }
 }
 
-int Stack::Top(void){
+int Queue::Front(void){
     if(isEmpty()){
-        std::cout << "Stack is Empty. There is no top." << std::endl;
-    }else{
-        return A[top-1];
+        std::cout << "Queue is Empty. Cannot return first element from empty queue." << std::endl;
+        return -1;
     }
+    return A[front];
 }
-
-bool Stack::isEmpty(void){
-    return(top==0);
-}
+/*
+Queue::Queue(Queue & que){
+    if(que.front == que.rear){
+        front = rear = -1;
+    }else{
+        //std::copy(std::begin(que.A), std::end(que.A), std::begin(A);
+        front = que.front;
+        rear = que.rear;
+    }
+}*/
 
 int main(){
-    Stack s(5);
-
-    s.Push(10);
-    (s.isEmpty()) ? std::cout << "Stack is Empty.\n" : std::cout << "Stack is not empty.\n";
-    s.Pop();
-    (s.isEmpty()) ? std::cout << "Stack is Empty.\n" : std::cout << "Stack is not empty.\n";
+    Queue q(5);
+    q.Enqueue(6);
+    q.Enqueue(7);
+    (q.isEmpty()) ? std::cout << "Queue is Empty.\n" : std::cout << "Queue is not empty\n";
+    std::cout << "First element in Queue is " << q.Front() << std::endl;
+    //Queue q2(q);
     return 0;
 }

@@ -1,78 +1,44 @@
 #include <iostream>
 
-class Queue{
-
+class Pointer{
     private:
-    int *A;
-    int front, rear, size;
+    int* poi;
+
     public:
-    Queue(int);
-    ~Queue(void);
-    bool isEmpty(void);
-    void Enqueue(int);
-    void Dequeue(void);
-    int Front(void);
-    Queue(Queue&);
+    void create(unsigned int);
+    int* ret(void);
+    void free(void);
+    void copy(Pointer &);
+    Pointer();
 };
 
-Queue::Queue(int n){
-    size = n;
-    A = new int[n];
-    front = -1;
-    rear = -1;
-}
-Queue::~Queue(void){
-    delete [] A;
+void Pointer::create(unsigned int n){
+    poi = new int[n];
 }
 
-bool Queue::isEmpty(void){
-    return(front == -1 && rear == -1);
+int* Pointer::ret(void){
+    return poi;
 }
 
-void Queue::Enqueue(int x){
-    if(isEmpty()){
-        front = rear = 0;
-    }else{
-        rear = (rear+1)%size;
-    }
-    A[rear] = x;
+void Pointer::free(void){
+    delete [] poi;
+    poi = NULL;
 }
 
-void Queue::Dequeue(void){
-    if(isEmpty()){
-        std::cout << "Queue is Empty. Cannot remove element from empty queue." << std::endl;
-        return;
-    }else if(front == rear){
-        rear = front = -1;
-    }else{
-        front = (front+1)%size;
-    }
+void Pointer::copy(Pointer &ref){
+    ref.poi = poi;
 }
 
-int Queue::Front(void){
-    if(isEmpty()){
-        std::cout << "Queue is Empty. Cannot return first element from empty queue." << std::endl;
-        return -1;
-    }
-    return A[front];
+Pointer::Pointer(){
+    poi = NULL;
 }
-/*
-Queue::Queue(Queue & que){
-    if(que.front == que.rear){
-        front = rear = -1;
-    }else{
-        //std::copy(std::begin(que.A), std::end(que.A), std::begin(A);
-        front = que.front;
-        rear = que.rear;
-    }
-}*/
 
 int main(){
-    Queue q(5);
-    q.Enqueue(6);
-    q.Enqueue(7);
-    (q.isEmpty()) ? std::cout << "Queue is Empty.\n" : std::cout << "Queue is not empty\n";
-    std::cout << "First element in Queue is " << q.Front() << std::endl;
-    //Queue q2(q);
+    Pointer po;
+    std::cout << "Value of pointer after declaration = " << po.ret() << std::endl;
+    po.create(20);
+    std::cout << "Value of pointer after creating array with 20 elements = " << po.ret() << std::endl;
+    po.free();
+    std::cout << "Value of pointer after deleting array = " << po.ret() << std::endl;
     return 0;
 }

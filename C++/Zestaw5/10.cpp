@@ -29,10 +29,6 @@ void Pointer::copy(Pointer &ref){
     ref.poi = poi;
 }
 
-Pointer::Pointer(){
-    poi = NULL;
-}
-
 int main(){
     Pointer po;
     std::cout << "Value of pointer after declaration = " << po.ret() << std::endl;
