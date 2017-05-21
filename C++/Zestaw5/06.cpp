@@ -6,26 +6,31 @@ class Point{
     private:
     int x, y;
     public:
-    void load_values_to(int n, int m);
-    int* load_values_from(void);
+    Point(int, int);
+    void set_values(int, int);
+    void load_values(void);
 };
 
-void Point::load_values_to(int n, int m){
+Point::Point(int a, int b){
+	x = a;
+	y = b;
+}
+
+void Point::set_values(int n, int m){
     x = n;
     y = m;
 }
 
-int* Point::load_values_from(void){
-    int results[2] = {x, y};
-    return results;
+void Point::load_values(void){
+	std::cout << "x = " << x << " y = " << y << std::endl;
 }
 
 int main(){
-    Point p;
+    Point p(3, 4);
     std::cout << "Values before change" << std::endl;
-    std::cout << "First value = " << p.load_values_from()[1] << std::endl << "Second value = " << p.load_values_from()[1] << "\n" << std::endl;
-    p.load_values_to(4,5);
+    p.load_values();
+    p.set_values(4,5);
     std::cout << "Values after change" << std::endl;
-    std::cout << "First value = " << p.load_values_from()[0] << std::endl << "Second value = " << p.load_values_from()[1] << std::endl;
+    p.load_values();
     return 0;
 }

@@ -6,27 +6,33 @@ class Point3d{
     private:
     int x, y, z;
     public:
-    void load_values_to(int n, int m, int k);
-    int* load_values_from(void);
+    Point3d(int, int, int);
+    void set_values(int, int, int);
+    void load_values(void);
 };
 
-void Point3d::load_values_to(int n, int m, int k){
+Point3d::Point3d(int n, int m, int k){
+	x = n;
+	y = m;
+	z = k;
+}
+
+void Point3d::set_values(int n, int m, int k){
     x = n;
     y = m;
     z = k;
 }
 
-int* Point3d::load_values_from(void){
-    int results[3] = {x, y, z};
-    return results;
+void Point3d::load_values(void){
+	std::cout << "x = " << x << " y = " << y << " z = " << z << std::endl;
 }
 
 int main(){
-    Point3d p;
+    Point3d p(2,3,4);
     std::cout << "Values before change" << std::endl;
-    std::cout << "First value = " << p.load_values_from()[1] << std::endl << "Second value = " << p.load_values_from()[1] << std::endl << "Third value = " << p.load_values_from()[2] << "\n" << std::endl;
-    p.load_values_to(4,5,6);
+	p.load_values();
+    p.set_values(4,5,6);
     std::cout << "Values after change" << std::endl;
-    std::cout << "First value = " << p.load_values_from()[0] << std::endl << "Second value = " << p.load_values_from()[1] << std::endl << "Third value = " << p.load_values_from()[2] << std::endl;
+    p.load_values();
     return 0;
 }
