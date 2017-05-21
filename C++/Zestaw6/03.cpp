@@ -29,12 +29,35 @@ void Person::load(void){
     std::cout << "Full name: " << first << " " << last << std::endl;
 }
 
-std::vector<Person> MakeVector(int n){
-    return std::vector<Person>(n, Person("Jan", "Kowalski"));
+class array_person{
+    private:
+    Person ** array;
+    int size;
+    public:
+    array_person(int, std::string, std::string);
+    ~array_person(void);
+    Person& at(int);
+};
+
+array_person::array_person(int n, std::string st, std::string lt){
+    array = new Person*[n];
+    size = n;
+    for(int i=0; i < n; i++){
+        array[i] = new Person(st, lt);
+    }
+}
+
+array_person::~array_person(void){
+    delete [] array;
+}
+
+Person& array_person::at(int i){
+    return *array[i];
 }
 
 int main(){
-    std::vector<Person> m = MakeVector(5);
-    m[0].load();
+    array_person arr(5, "Mateusz", "Gorczycki");
+    Person p = arr.at(2);
+    p.load();
     return 0;
 }
