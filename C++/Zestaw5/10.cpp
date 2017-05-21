@@ -35,9 +35,10 @@ Pointer::Pointer(){
 
 int main(){
     Pointer po;
+    std::cout << "Value of pointer after declaration = " << po.ret() << std::endl;
     po.create(20);
-    std::cout << po.ret() << std::endl;
+    std::cout << "Value of pointer after creating array with 20 elements = " << po.ret() << std::endl;
     po.free();
-    std::cout << po.ret() << std::endl;
+    std::cout << "Value of pointer after deleting array = " << po.ret() << std::endl;
     return 0;
 }
